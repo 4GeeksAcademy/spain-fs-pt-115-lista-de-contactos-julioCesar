@@ -2,6 +2,11 @@ export const getContactos = async (dispatch) => {
   try {
     const response = await fetch("https://playground.4geeks.com/contact/agendas/julio/contacts");
     const data = await response.json();
+
+    if (!response.ok) {
+      crearAgenda();
+      return
+    }
           
     console.log("Respuesta completa de la API:", data);
     console.log("Contactos recibidos:", data.contacts);
@@ -79,7 +84,7 @@ export const eliminarContacto = async (idContacto, dispatch) => {
 
     console.log("Contacto eliminado:", idContacto);
 
-    //  Recargar lista después de eliminar
+    
     await getContactos(dispatch);
   } catch (error) {
     console.error("Error al eliminar contacto:", error);

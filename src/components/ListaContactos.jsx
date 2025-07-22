@@ -6,7 +6,7 @@ import { ContactCard } from "./ContactCard.jsx";
 
 export const ListaContactos = () => {
 
-    const {store, dispatch} =useGlobalReducer()
+    const { store, dispatch } = useGlobalReducer()
 
     return (
         <div className="container mt-5">
@@ -17,11 +17,15 @@ export const ListaContactos = () => {
             </div>
 
             <ul className="list-group">
-                {store.contactos.map((contacto) => (
-                    <ContactCard key={contacto.id} contacto={contacto} />
-                ))}
+                {store.contactos.length === 0 ? (
+                    <li className="list-group-item text-center">No hay contactos agregados aún</li>
+                ) : (
+                    store.contactos.map((contacto) => (
+                        <ContactCard key={contacto.id} contacto={contacto} />
+                    ))
+                )}
             </ul>
-            
+
         </div>
     );
 }
